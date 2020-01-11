@@ -16,8 +16,11 @@ def test_robotstxt():
     assert foo.content == {'Chrome': [('Allow', '/foo')],
                            'FireFox': [('Disallow', '/bar')]}
 
-    test_utils.assert_same_elements_in_lists(foo.user_agents,
+    test_utils.assert_same_elements_in_lists(foo.user_agents(),
                                              ['Chrome', 'FireFox'])
-    test_utils.assert_same_elements_in_lists(foo.endpoints, [('Allow', '/foo'),
-                                                             ('Disallow',
-                                                              '/bar')])
+    test_utils.assert_same_elements_in_lists(foo.rules(),
+                                             [('Allow', '/foo'),
+                                              ('Disallow', '/bar')])
+    test_utils.assert_same_elements_in_lists(
+        foo.rules(user_agent='Chrome'),
+        [('Allow', '/foo')])
