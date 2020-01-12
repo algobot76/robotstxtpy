@@ -1,5 +1,7 @@
 from itertools import chain
 
+from robotstxtpy.exceptions import RobotsTxtException
+
 
 class RobotsTxt:
 
@@ -13,7 +15,7 @@ class RobotsTxt:
 
     def add_endpoint(self, user_agent, permission, endpoint):
         if user_agent not in self.content:
-            self.add_user_agent(user_agent)
+            raise RobotsTxtException()
         self.content[user_agent].append((permission, endpoint))
 
     def user_agents(self):
