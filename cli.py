@@ -54,6 +54,8 @@ def more_user_agent(ans):
         add_user_agent()
     elif ans == 'n':
         click.echo('n')
+    elif ans == 'exit':
+        click.echo('exit')
     else : 
         click.echo('that is not a valid answer')
         more_user_agent()
