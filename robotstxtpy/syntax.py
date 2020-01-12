@@ -7,15 +7,9 @@ def check(robottxt):
     s = ["Allow", "Disallow"]
     allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 -._~:/?#[]@!$&'()*+,;="
     user_agent = robottxt.user_agents()
-    print(user_agent)
     for agent in user_agent:
-        print(agent)
-        cntnt = robottxt.rules(agent)
-        print("cntnt", cntnt)
         for tup in cntnt:
-            print("in cntnt", tup)
             permission, endpoint = tup[0], tup[1]
-            print(permission, endpoint)
             if permission not in s:
                 return 0
             elif set(allowedChars) <= set(endpoint):
