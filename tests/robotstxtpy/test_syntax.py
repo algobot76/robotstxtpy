@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
-from robotstxtpy.syntax import checkLine
+from robotstxtpy.syntax import check
+from robotstxtpy import RobotsTxt
 
-def test_checkLine():
-    assert checkLine(["abc", "Allowed: /home/", "User-agent: hello",  "Allowed: abc", "Disallowed: /test/%%" ]) == 0
-    
+def test_check():
+    rbtxt = RobotsTxt()
+    rbtxt.add_user_agent("Chrome")
+    rbtxt.add_endpoint("Chrome", "Allow", "test")
+    assert check(rbtxt) == 1
+
 if __name__ == "__main__":
-    test_checkLine()
+    test_check()
     
