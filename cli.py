@@ -46,7 +46,7 @@ def disallowed_url(disallow):
 
 
 @click.command()
-@click.option('--ans', prompt='more user-agents to add',
+@click.option('--ans', prompt="'y' to add more user-agents 'n' to produce the robots.txt",
                 help="'y' to add more user-agents 'n' to produce the robots.txt")
 def more_user_agent(ans):
     if ans == 'y':
