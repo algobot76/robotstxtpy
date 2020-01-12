@@ -66,14 +66,10 @@ def path_input(path):
     else:
         robottxt.generate(path)
 
-
-# asks user for user agent
-# asks user for URL
-# generate robot.txt
-
-
 # Preprocess urls gathered by crawler
 # returns a processed set of URLs
+
+
 def post_process(urls, user_agent_list):
     for agent in user_agent_list:
         robottxt.add_user_agent(agent)
@@ -81,7 +77,3 @@ def post_process(urls, user_agent_list):
             endpoint = filter_out_path_from_url(url)
             if len(endpoint) != 0:
                 robottxt.add_endpoint(agent, 'Disallow', endpoint)
-
-
-if __name__ == '__main__':
-    add_user_agent()
