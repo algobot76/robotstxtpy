@@ -6,7 +6,7 @@ def test_check():
     rbtxt = RobotsTxt()
     rbtxt.add_user_agent("Chrome")
     rbtxt.add_endpoint("Chrome", "Allow", "test")
-    assert check(rbtxt) == 1
+    assert check(rbtxt) == True
 
 if __name__ == "__main__":
     test_check()
