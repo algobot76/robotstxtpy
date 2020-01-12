@@ -26,10 +26,9 @@ class RobotsTxt:
             return list(chain.from_iterable(self.content.values()))
         return self.content.get(user_agent, [])
 
-
-def generate_robotstxt(output_path, robotstxt):
-    with open(f'{output_path}/robots.txt', 'w') as writer:
-        for user_agent in robotstxt.user_agents():
-            writer.write(f'User-agent: {user_agent}\n')
-            for permission, endpoint in robotstxt.rules(user_agent):
-                writer.write(f'{permission}: {endpoint}')
+    def generate(self, output_path='.'):
+        with open(f'{output_path}/robots.txt', 'w') as writer:
+            for user_agent in self.user_agents():
+                writer.write(f'User-agent: {user_agent}\n')
+                for permission, endpoint in self.rules(user_agent):
+                    writer.write(f'{permission}: {endpoint}')
