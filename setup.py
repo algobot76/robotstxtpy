@@ -28,7 +28,6 @@ setuptools.setup(
         'itsdangerous',
         'Jinja2',
         'MarkupSafe',
-        'pkg-resources',
         'requests',
         'soupsieve',
         'urllib3',
