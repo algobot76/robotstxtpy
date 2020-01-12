@@ -10,5 +10,6 @@ setup(
     entry_points='''
         [console_scripts]
         robotstxt=robotstxtpy.cli:add_user_agent
+        crawler=robotstxtpy.crawler_cli:add_user_agent
     ''',
 )
