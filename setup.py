@@ -1,38 +1,34 @@
 import setuptools
 
+authors = ['Aaron Ngu', 'Adrian Yeung', 'Kaitian Xie', 'Omar Tsai']
+author_emails = ['aaronngu@hotmail.com', 'adrian_yeung_2@sfu.ca',
+                 'xkaitian@gmail.com', 'omar2535@gmail.com']
+
 setuptools.setup(
     name='robotstxt',
     version='0.0.2',
-    author="Example Author",
-    url="https://github.com/algobot76/robotstxtpy",
+    author=', '.join(authors),
+    author_email=', '.join(author_emails),
+    url='https://github.com/algobot76/robotstxtpy',
     include_package_data=True,
     entry_points='''
         [console_scripts]
         robotstxt=robotstxtpy.cli:add_user_agent
         crawler=robotstxtpy.crawler_cli:add_user_agent
     ''',
-    long_description_content_type="text/markdown",
+    long_description_content_type='text/markdown',
     packages=setuptools.find_packages(),
     classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-    ],  
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+    ],
     install_requires=[
         'beautifulsoup4',
-        'certifi',
-        'chardet',
         'click',
-        'Flask',
-        'idna',
-        'itsdangerous',
-        'Jinja2',
-        'MarkupSafe',
-        'pkg-resources',
         'requests',
         'soupsieve',
         'urllib3',
-        'Werkzeug',
     ],
     python_requires='>=3.6',
 )
