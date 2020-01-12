@@ -1,5 +1,7 @@
 from itertools import chain
 
+from robotstxtpy.exceptions import RobotsTxtException
+
 
 class RobotsTxt:
 
@@ -13,13 +15,21 @@ class RobotsTxt:
 
     def add_endpoint(self, user_agent, permission, endpoint):
         if user_agent not in self.content:
-            self.add_user_agent(user_agent)
+            raise RobotsTxtException()
         self.content[user_agent].append((permission, endpoint))
 
-    @property
     def user_agents(self):
         return list(self.content.keys())
 
-    @property
-    def endpoints(self):
-        return list(chain.from_iterable(self.content.values()))
+    def rules(self, user_agent=None):
+        if user_agent is None:
+            return list(chain.from_iterable(self.content.values()))
+        return self.content.get(user_agent, [])
+
+
+def generate_robotstxt(output_path, robotstxt):
+    with open(f'{output_path}/robots.txt', 'w') as writer:
+        for user_agent in robotstxt.user_agents():
+            writer.write(f'User-agent: {user_agent}\n')
+            for permission, endpoint in robotstxt.rules(user_agent):
+                writer.write(f'{permission}: {endpoint}')
