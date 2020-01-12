@@ -1,4 +1,5 @@
 import re
+import urllib.request
 from urllib.error import URLError
 from urllib.parse import urlparse
 from urllib.request import urlopen
@@ -12,16 +13,16 @@ def __is_valid_url(url):
         return False
 
 
-def __is_reachable_url(url):
+def __is_reachable_url(url, headers):
     try:
-        urlopen(url)
+        request = urllib.Request(url, headers=headers)
+        urlopen(request)
         return True
     except URLError:
         return False
 
-
-def validate_url(url):
-    return __is_valid_url(url) and __is_reachable_url(url)
+def validate_url(url, headers={}):
+    return __is_valid_url(url) and __is_reachable_url(url, headers)
 
 # removes https or http from URL string
 # also removes www if it exists in url string
