@@ -4,8 +4,6 @@ from robotstxtpy import RobotsTxt
 from robotstxtpy.crawler import Crawler
 from robotstxtpy.utils import filter_out_path_from_url
 
-# from robotstxtpy.utils import validate_url
-
 user_agent_list = []
 robottxt = RobotsTxt()
 
@@ -46,9 +44,6 @@ def url_input(url):
     if url.isspace():
         click.echo('Enter a URL!')
         url_input()
-    # elif not validate_url(url):
-    #     click.echo('Invalid URL, please enter a valid URL')
-    #     url_input()
     else:
         crawler = Crawler(url)
         urls = crawler.get_endpoints_from_url()
@@ -66,10 +61,9 @@ def path_input(path):
     else:
         robottxt.generate(path)
 
+
 # Preprocess urls gathered by crawler
 # returns a processed set of URLs
-
-
 def post_process(urls, user_agent_list):
     for agent in user_agent_list:
         robottxt.add_user_agent(agent)
