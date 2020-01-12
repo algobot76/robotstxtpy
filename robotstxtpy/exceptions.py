@@ -1,0 +1,2 @@
+class RobotsTxtException(Exception):
+    pass
