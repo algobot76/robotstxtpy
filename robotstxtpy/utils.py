@@ -21,7 +21,6 @@ def __is_reachable_url(url, headers):
     except URLError:
         return False
 
-
 def validate_url(url, headers={}):
     return __is_valid_url(url) and __is_reachable_url(url, headers)
 

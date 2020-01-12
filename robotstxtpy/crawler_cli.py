@@ -61,7 +61,6 @@ def path_input(path):
     else:
         robottxt.generate(path)
 
-
 # Preprocess urls gathered by crawler
 # returns a processed set of URLs
 def post_process(urls, user_agent_list):
