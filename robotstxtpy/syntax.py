@@ -11,24 +11,22 @@ def check(robottxt):
         for tup in cntnt:
             permission, endpoint = tup[0], tup[1]
             if permission not in s:
-                return 0
+                return False
             elif set(allowedChars) <= set(endpoint):
-                return 0
+                return False
             elif re.search(r"([+._~:?#[]@!$&'*,;()=-])\1", endpoint):
-                return 0
+                return False
             else:
-                return 1
+                return True
         
 def main():
-    state = 1
+    state = True
     rbtxt = RobotsTxt()    
     state = check(rbtxt)
-    if state == 0:
+    if not state:
         print("Syntax error. Please check syntax.")
     else:
         print("Error free!")
     return
 
-if __name__ == "__main__":
-    main()
     
