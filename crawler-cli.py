@@ -1,7 +1,6 @@
 import click
 
 from robotstxtpy import RobotsTxt
-from robotstxtpy import generate_robotstxt
 from robotstxtpy.crawler import Crawler
 from robotstxtpy.utils import filter_out_path_from_url
 
@@ -63,9 +62,9 @@ def url_input(url):
               help='Enter path to be crawled')
 def path_input(path):
     if path.isspace():
-        generate_robotstxt('.', robottxt)
+        robottxt.generate('.')
     else:
-        generate_robotstxt(path, robottxt)
+        robottxt.generate(path)
 
 
 # asks user for user agent
