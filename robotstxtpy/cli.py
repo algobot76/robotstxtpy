@@ -1,5 +1,9 @@
 import click
 
+from robotstxtpy import RobotsTxt
+
+ctx = dict(robotstxt=RobotsTxt(), curr_agent='')
+
 
 @click.command()
 @click.option('--agent', prompt='who is the user-agent',
@@ -11,6 +15,8 @@ def add_user_agent(agent):
     elif agent == 'exit':
         return
     else:
+        ctx['robotstxt'].add_user_agent(agent)
+        ctx['curr_agent'] = agent
         click.echo('User agent is %s' % agent)
         add_allowed_url()
 
@@ -24,10 +30,11 @@ def add_allowed_url(allowed_url):
     elif allowed_url == 'n':
         add_disallowed_url()
     elif allowed_url[:1] == '/':
-        click.echo('endpoint added : %s' % allowed_url)
+        click.echo(f'"Allowed" endpoint added: {allowed_url}')
+        ctx['robotstxt'].add_endpoint(ctx['curr_agent'], 'Allow', allowed_url)
         add_allowed_url()
     else:
-        click.echo('endpoint needs to start with /')
+        click.echo('Endpoint needs to start with /')
         add_allowed_url()
 
 
@@ -41,10 +48,12 @@ def add_disallowed_url(disallowed_url):
     elif disallowed_url == 'n':
         more_user_agent()
     elif disallowed_url[:1] == '/':
-        click.echo('Disallow endpoint added : %s' % disallowed_url)
+        click.echo(f'"Disallow" endpoint added: {disallowed_url}')
+        ctx['robotstxt'].add_endpoint(ctx['curr_agent'], 'Disallow',
+                                      disallowed_url)
         add_disallowed_url()
     else:
-        click.echo('endpoint needs to start with /')
+        click.echo('Endpoint needs to start with /')
         add_disallowed_url()
 
 
@@ -57,6 +66,7 @@ def more_user_agent(ans):
         click.echo('y')
         add_user_agent()
     elif ans == 'n':
+        ctx['robotstxt'].generate()
         click.echo('n')
     elif ans == 'exit':
         click.echo('exit')
