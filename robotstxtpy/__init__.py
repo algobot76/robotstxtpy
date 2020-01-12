@@ -31,4 +31,5 @@ class RobotsTxt:
             for user_agent in self.user_agents():
                 writer.write(f'User-agent: {user_agent}\n')
                 for permission, endpoint in self.rules(user_agent):
-                    writer.write(f'{permission}: {endpoint}')
+                    writer.write(f'{permission}: {endpoint}\n')
+                writer.write('\n')
