@@ -15,7 +15,7 @@ $ pre-commit install
 
 To interact with the library functions directly, there are CLI's for this.
 ```bash
-pip install -e
+pip install -e .
 ```
 
 The two CLI's available so far are `robotstxt` and `crawler`
