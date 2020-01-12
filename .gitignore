@@ -112,3 +112,6 @@ env/
 
 ### MacOS ###
 .DS_Store
+
+# Project specific
+robots.txt

@@ -14,7 +14,8 @@ def test_validate_url(mocker, example_valid_url, example_invalid_url):
 
 
 def test_filter_out_path_from_url():
-    assert 'google.ca' == utils.filter_out_path_from_url('https://google.ca')
-    assert 'random/stuff.com' == utils.filter_out_path_from_url(
-        'http://www.random/stuff.com')
-    assert 'op.gg' == utils.filter_out_path_from_url('www.op.gg')
+    assert '' == utils.filter_out_path_from_url('https://google.ca')
+    assert '/stuff' == utils.filter_out_path_from_url(
+        'random.com/stuff')
+    assert '/test/this/site/' == utils.filter_out_path_from_url(
+        'op.gg/test/this/site/')

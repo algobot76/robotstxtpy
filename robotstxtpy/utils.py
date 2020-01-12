@@ -31,5 +31,9 @@ def filter_out_path_from_url(link) -> str:
     if(link.startswith('www')):
         return link.replace('www.', '')
     url = re.compile(r'https?://(www\.)?')
-    new_url = url.sub('', link).strip().strip('/')
-    return new_url
+    new_url = url.sub('', link).strip()
+    index_of_first_slash = new_url.find('/')
+    if index_of_first_slash == -1:
+        return ''
+    else:
+        return new_url[index_of_first_slash:]
