@@ -51,6 +51,7 @@ def disallowed_url(disallow):
 def more_user_agent(ans):
     if ans == 'y':
         click.echo('y')
+        add_user_agent()
     elif ans == 'n':
         click.echo('n')
     else : 
