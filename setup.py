@@ -29,6 +29,7 @@ setuptools.setup(
         'requests',
         'soupsieve',
         'urllib3',
+        'lxml',
     ],
     python_requires='>=3.6',
 )
