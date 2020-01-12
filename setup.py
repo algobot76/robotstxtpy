@@ -6,7 +6,7 @@ author_emails = ['aaronngu@hotmail.com', 'adrian_yeung_2@sfu.ca',
 
 setuptools.setup(
     name='robotstxt',
-    version='0.0.2',
+    version='0.1.0',
     author=', '.join(authors),
     author_email=', '.join(author_emails),
     url='https://github.com/algobot76/robotstxtpy',
