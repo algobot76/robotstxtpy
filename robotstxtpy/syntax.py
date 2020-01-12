@@ -20,7 +20,7 @@ def checkLine(lines):
     allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 -._~:/?#[]@!$&'()*+,;="
     # specialChars = allowedChars.split('-')[1]
     # validCombos = ['*.', '-*', '*?']
-    print(len(lines))
+    # print(len(lines))
     for count, l in enumerate(lines):
         # print(count)
         # print(l)
@@ -31,7 +31,7 @@ def checkLine(lines):
             # print("a", count)
             return 0
         elif "#" in l or not l.strip():
-            print("comment or blank")
+            pass
         elif s[0] in l:
             if not l.startswith(s[0], 0):
                 # print("b", count)
