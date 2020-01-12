@@ -1,2 +1,10 @@
+autopep8
+flake8
+flake8-blind-except
+flake8-builtins
+flake8-isort
+flake8-logging-format
+isort[requirements,pipfile]
+pre-commit>=1.21.0
 pytest>=5.3.2
 pytest-mock>=2.0.0
