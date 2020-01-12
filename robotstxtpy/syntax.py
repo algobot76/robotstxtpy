@@ -1,77 +1,40 @@
 #!/usr/bin/env python3
-
+from robotstxtpy import RobotsTxt
 import re
-from argparse import ArgumentParser
 # Check syntax
 
-def readText(filename):
-    with open(filename, 'r') as f:
-        line = f.readline()
-        cnt = 1
-        lines = []
-        while line:
-            lines.append(line.strip())
-            line = f.readline()
-            cnt += 1
-    return lines
-
-def checkLine(lines):
-    s = ["User-Agent: ", "Crawl-delay: ", "Allow: ", "Disallow: "]
+def check(robottxt):
+    s = ["Allow", "Disallow"]
     allowedChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 -._~:/?#[]@!$&'()*+,;="
-    # specialChars = allowedChars.split('-')[1]
-    # validCombos = ['*.', '-*', '*?']
-    # print(len(lines))
-    for count, l in enumerate(lines):
-        # print(count)
-        # print(l)
-        if re.search(r"([+._~:?#[]@!$&'*,;()=-])\1", l):
-            return 0
-        if not set(l) <= set(allowedChars):
-            # print(set(l), "\n",  set(allowedChars))
-            # print("a", count)
-            return 0
-        elif "#" in l or not l.strip():
-            pass
-        elif s[0] in l:
-            if not l.startswith(s[0], 0):
-                # print("b", count)
+    user_agent = robottxt.user_agents()
+    print(user_agent)
+    for agent in user_agent:
+        print(agent)
+        cntnt = robottxt.rules(agent)
+        print("cntnt", cntnt)
+        for tup in cntnt:
+            print("in cntnt", tup)
+            permission, endpoint = tup[0], tup[1]
+            print(permission, endpoint)
+            if permission not in s:
                 return 0
-        elif s[1] in l:
-            if not l.startswith(s[1], 0) or not isinstance(int(l[len(s[1])]), int):
-                # print("c", count)
+            elif set(allowedChars) <= set(endpoint):
                 return 0
-        elif s[2] in l:
-            if not l.startswith(s[2], 0) or not l[len(s[2])]  == '/':
-                # print("d", count)
+            elif re.search(r"([+._~:?#[]@!$&'*,;()=-])\1", endpoint):
                 return 0
-        elif s[3] in l:
-            if not l.startswith(s[3], 0) or not l[len(s[3])] == '/':
-                # print("e", count)
-                return 0
-        # else:                  
-            # spliced = l.split("/", maxsplit=1)
-            # print(spliced[0])
-            # if not spliced[0] == any(s): return 0
-
-def main(args):
+            else:
+                return 1
+        
+def main():
     state = 1
-    # change this as needed, can generalize to PATH/TO/FILE/robots.txt
-    fn = args.filename
-    lines = readText(fn)
-    state = checkLine(lines)
+    rbtxt = RobotsTxt()    
+    state = check(rbtxt)
     if state == 0:
         print("Syntax error. Please check syntax.")
     else:
         print("Error free!")
     return
 
-def parseArguments():
-    parser = ArgumentParser()
-    parser.add_argument("--filename", type=str, default="robots.txt")
-    args = parser.parse_args()
-    return args
-
 if __name__ == "__main__":
-    args = parseArguments()
-    main(args)
+    main()
     
