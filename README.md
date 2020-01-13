@@ -1,6 +1,15 @@
-# robotstxtpy
+# How to install robotstxtpy.
 
-## Environment Setup
+```bash
+pip install --extra-index-url https://test.pypi.org/simple/ robotstxt==0.0.3
+```
+
+run `robotstxt` to generate robots.txt in the current directory
+
+run `crawler` to generate robots.txt using a crawler with Disallow for all endpoints
+
+## Link to robotstxt pypi library
+https://test.pypi.org/project/robotstxt/0.1.0/
 
 ### Install pre-commit
 
